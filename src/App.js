@@ -8,8 +8,8 @@ const App = () => {
   return (
     <div>
       <h2>Anecdotes</h2>
+      <Notification />      
       <AnecdoteList />
-      <Notification />
       <AnecdoteForm />
     </div>
   )

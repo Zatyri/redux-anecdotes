@@ -1,5 +1,6 @@
 import React from 'react'
 import { addAction } from '../reducers/anecdoteReducer'
+import {showVoteAction} from '../reducers/notificationReducer'
 import { useDispatch } from 'react-redux'
 
 const AddAnecdote = () => {
@@ -10,7 +11,11 @@ const AddAnecdote = () => {
         console.log('adding ' + event.target.anecdote);
         
         dispatch(addAction(event.target.anecdote.value))
-        event.target.anecdote.value = ''
+        dispatch(showVoteAction(event.target.anecdote.value))
+        event.target.anecdote.value = ''        
+        setTimeout(() => {
+            dispatch(showVoteAction('initial'))  
+          }, 5000)
 
     } 
     return (
