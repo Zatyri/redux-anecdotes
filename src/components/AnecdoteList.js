@@ -31,9 +31,10 @@ const AnecdoteList = () => {
         
     })
 
-    const vote = (id, content) => {
+    const vote = (id, content, votes) => {
       console.log('vote', id)
-      console.log('content', content);      
+      console.log('content', content); 
+      anecdoteService.update(id, votes)    
       dispatch(voteAction(id))
       dispatch(showVoteAction(content))   
       setTimeout(() => {
@@ -52,7 +53,7 @@ const AnecdoteList = () => {
                 </div>
                 <div>
                     has {anecdote.votes}
-                    <button onClick={() => vote(anecdote.id, anecdote.content)}>vote</button>
+                    <button onClick={() => vote(anecdote.id, anecdote.content, anecdote.votes)}>vote</button>
                 </div>
     </div>
   )}

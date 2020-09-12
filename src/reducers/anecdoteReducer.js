@@ -42,7 +42,7 @@ export const voteAction = (id) => {
 export const addAction = (newAnecdote) => {
   return {
     type: 'ADD',
-    data: asObject(newAnecdote)
+    data: newAnecdote
   }
 }
 
@@ -63,7 +63,7 @@ const reducer = (state = [], action) => {
         anecdote.id !== id ? anecdote : changedAnecdote
       )
       return newState.sort((a,b) => (a.votes < b.votes)?1:((b.votes < a.votes)?-1:0))
-    case 'ADD':
+    case 'ADD':      
       return [...state, action.data]
     default:
       return state
