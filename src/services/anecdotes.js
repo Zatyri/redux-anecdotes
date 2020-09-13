@@ -14,8 +14,8 @@ const post = async (anecdote) => {
   return request.data
 }
 
-const update = async (ident, vote) => {
-  const response = await axios.patch(`${baseUrl}/${ident}`, {votes: vote +1 })  
+const update = async (id, vote) => {
+  const response = await axios.patch(`${baseUrl}/${id}`, {votes: vote +1 })  
   return response.data
 }
 

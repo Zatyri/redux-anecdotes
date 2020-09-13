@@ -1,8 +1,7 @@
 import React from 'react'
 import { addAction } from '../reducers/anecdoteReducer'
-import {showVoteAction} from '../reducers/notificationReducer'
+import {notificationAction} from '../reducers/notificationReducer'
 import { useDispatch } from 'react-redux'
-import anecdoteService from '../services/anecdotes'
 
 const AddAnecdote = () => {
     const dispatch = useDispatch()
@@ -17,15 +16,9 @@ const AddAnecdote = () => {
             id: getId(),
             votes: 0
           }
-
-        anecdoteService.post(newAnecdote)
-        
         dispatch(addAction(newAnecdote))
-        dispatch(showVoteAction(event.target.anecdote.value))
+        dispatch(notificationAction(`Added anecdote: ${event.target.anecdote.value}`, 5))
         event.target.anecdote.value = ''        
-        setTimeout(() => {
-            dispatch(showVoteAction('initial'))  
-          }, 5000)
 
     }
     return (

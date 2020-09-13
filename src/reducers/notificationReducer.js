@@ -6,21 +6,33 @@ const reducer = ((state = initialMessage, action) => {
         case 'SHOWVOTE':         
             return action.data
         case 'DEFAULT':
+            
+            
             return initialMessage
         default:
             return state
     }
 })
 
-export const showVoteAction = (content) => {
-    if(content === 'initial'){
-        return {
-            type: 'DEFAULT'
-        }
-    }  
-    return {
-        type: 'SHOWVOTE',
-        data: content
+export const notificationAction = (content, time) => {
+
+    return dispatch => {
+        dispatch({
+            type: 'SHOWVOTE',
+            data: content
+        })
+        setTimeout(() => {
+            (dispatch(cleatNotificationAction()))
+        }, time*1000)
+
+    }
+}
+
+const cleatNotificationAction = () => {  
+    return dispatch => {        
+        dispatch({
+        type: 'DEFAULT'
+        })
     }
 }
 
