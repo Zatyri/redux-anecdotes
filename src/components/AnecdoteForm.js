@@ -1,10 +1,9 @@
 import React from 'react'
 import { addAction } from '../reducers/anecdoteReducer'
 import {notificationAction} from '../reducers/notificationReducer'
-import { useDispatch } from 'react-redux'
+import { connect } from 'react-redux'
 
-const AddAnecdote = () => {
-    const dispatch = useDispatch()
+const AddAnecdote = (props) => {    
 
     const getId = () => (100000 * Math.random()).toFixed(0)
 
@@ -16,8 +15,8 @@ const AddAnecdote = () => {
             id: getId(),
             votes: 0
           }
-        dispatch(addAction(newAnecdote))
-        dispatch(notificationAction(`Added anecdote: ${event.target.anecdote.value}`, 5))
+        props.addAction(newAnecdote)
+        props.notificationAction(`Added anecdote: ${event.target.anecdote.value}`, 5)
         event.target.anecdote.value = ''        
 
     }
@@ -32,4 +31,15 @@ const AddAnecdote = () => {
     )
 }
 
-export default AddAnecdote
+const mapDispatchToProps = {
+    addAction,
+    notificationAction
+}
+
+const mapStateToProps = (state) => {
+    return state
+}
+
+const ConnectedAnecdoteForm = connect(mapStateToProps, mapDispatchToProps)(AddAnecdote)
+
+export default ConnectedAnecdoteForm
