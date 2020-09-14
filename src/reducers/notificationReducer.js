@@ -1,4 +1,5 @@
 const initialMessage = 'Welcome to my anecdote site'
+let timer
 
 
 const reducer = ((state = initialMessage, action) => {
@@ -15,13 +16,14 @@ const reducer = ((state = initialMessage, action) => {
 })
 
 export const notificationAction = (content, time) => {
-
+    
     return dispatch => {
         dispatch({
             type: 'SHOWVOTE',
             data: content
-        })
-        setTimeout(() => {
+        })        
+        clearTimeout(timer)
+        timer = setTimeout(() => {
             (dispatch(cleatNotificationAction()))
         }, time*1000)
 
